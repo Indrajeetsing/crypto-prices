@@ -102,6 +102,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "crypto-prices:build:production",
+            "firebaseProject": "resume-builder-4491e",
+            "firebaseHostingSite": "resume-builder-4491e"
+          }
         }
       }
     }

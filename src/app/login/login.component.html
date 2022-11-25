@@ -1,9 +1,9 @@
-<mat-card class="container">
+<mat-card class="container" fxLayout="column" fxLayoutGap="10px">
   <form fxLayout="column" [formGroup]="loginForm" (ngSubmit)="login()">
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" />
-      <mat-error>{{ getErrorMessage() }}</mat-error>
+      <mat-error>{{ getEmailErrorMessage() }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Password</mat-label>
@@ -24,7 +24,7 @@
       </button>
     </mat-form-field>
     <button
-      mat-raised-button
+      mat-stroked-button
       color="primary"
       type="submit"
       [disabled]="!loginForm.valid"
@@ -33,4 +33,13 @@
       Login
     </button>
   </form>
+  <div fxLayout="column">
+    <mat-label class="mat-h5 text-align-center">Forgot Password?</mat-label>
+    <mat-label class="mat-h5 text-align-center"
+      >Don't have an account?
+      <span class="sign-up-text" (click)="loadSignUp()"
+        >Sign up</span
+      ></mat-label
+    >
+  </div>
 </mat-card>

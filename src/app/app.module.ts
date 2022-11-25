@@ -19,6 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +29,17 @@ import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CardComponent } from './shared/card/card.component';
+import { ResumeDetailsComponent } from './resume-details/resume-details.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
+
+import { environment } from 'src/environments/environment';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFunctions, getFunctions } from '@angular/fire/functions';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -37,6 +51,9 @@ import { CardComponent } from './shared/card/card.component';
     LoginComponent,
     DashboardComponent,
     CardComponent,
+    ResumeDetailsComponent,
+    DialogComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +74,16 @@ import { CardComponent } from './shared/card/card.component';
     MatInputModule,
     MatCardModule,
     MatChipsModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatRadioModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFunctions(() => getFunctions()),
   ],
-  providers: [],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

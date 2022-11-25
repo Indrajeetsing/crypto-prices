@@ -1,0 +1,12 @@
+.file-upload-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding-left: 0.75em;
+  color: #919191;
+
+  .file-name-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

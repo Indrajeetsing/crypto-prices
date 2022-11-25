@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "resume-builder-4491e": {
+      "hosting": {
+        "crypto-prices": [
+          "resume-builder-4491e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "resume-builder-4491e"
+  }
+}

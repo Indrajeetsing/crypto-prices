@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Let's Start</h1>
+<div fxLayout="column">
+  <!-- <p>What's your favorite animal?</p> -->
+  <mat-form-field appearance="outline" fxFlex>
+    <mat-label>Resume Title</mat-label>
+    <input matInput [(ngModel)]="data.title" />
+  </mat-form-field>
+  <p>Import using file upload</p>
+  <div
+    fxflex
+    fxLayoutAlign="space-between center"
+    class="file-upload-container"
+  >
+    <label #fileName class="file-name-label">No file chosen</label>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="fileInput.click()"
+    >
+      Choose File
+    </button>
+    <input
+      hidden
+      accept=".doc, .docx, .pdf"
+      (change)="onFileSelected()"
+      #fileInput
+      type="file"
+      id="file"
+    />
+  </div>
+  <mat-hint> Only support .pdf, .doc| Max file size: 1 MB </mat-hint>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    [mat-dialog-close]="data.animal"
+    cdkFocusInitial
+  >
+    Create
+  </button>
+</div>

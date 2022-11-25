@@ -1,0 +1,37 @@
+<mat-card class="container" fxLayout="column" fxLayoutGap="10px">
+  <form fxLayout="column" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error> Name is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error>{{ getEmailErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" />
+      <mat-error>Password is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Confirm Password</mat-label>
+      <input matInput formControlName="confirmPassword" />
+      <mat-error>{{ getConfirmPassErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <button
+      mat-stroked-button
+      color="primary"
+      type="submit"
+      [disabled]="!signUpForm.valid"
+      fxFlex
+    >
+      Sign up
+    </button>
+  </form>
+  <mat-label class="mat-h5 text-align-center"
+    >Have an account?
+    <span class="login-text" (click)="loadLogin()">Login</span></mat-label
+  >
+</mat-card>
