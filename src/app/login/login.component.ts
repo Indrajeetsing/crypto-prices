@@ -26,12 +26,16 @@ export class LoginComponent implements OnInit {
     return email?.hasError('email') ? 'Not a valid email' : '';
   }
 
-  ngOnInit(): void {
-    console.log(this.auth.isLoggedIn());
-  }
+  ngOnInit(): void {}
 
   login() {
-    this.router.navigate(['dashboard']);
+    const { email, password } = this.loginForm.value;
+    if (email && password) {
+      this.auth
+        .login(email, password)
+        .then(() => this.router.navigate(['dashboard']))
+        .catch((err) => console.log);
+    }
   }
 
   loadSignUp() {

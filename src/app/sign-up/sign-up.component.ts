@@ -7,7 +7,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService, User } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,7 +16,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   signUpForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -58,9 +59,25 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {}
 
   signUp() {
-    const { email, password } = this.signUpForm.value;
-    if (email && password) {
-      this.auth.signUp(email, password);
+    const { email, password, name } = this.signUpForm.value;
+    if (email && password && name) {
+      this.auth
+        .signUp(email, password)
+        .then((res) => {
+          if (res.user) {
+            const userObj: User = {
+              email,
+              name,
+              last_updated: new Date(),
+              id: res.user.uid,
+            };
+            this.auth
+              .addUser(userObj)
+              .then(() => this.router.navigate(['dashboard']))
+              .catch((err) => console.log);
+          }
+        })
+        .catch((err) => console.log);
     }
   }
 
